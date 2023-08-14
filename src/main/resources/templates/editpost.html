@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Post - Blog Spring</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <th:block th:replace="~{/Fragments/head :: head}"></th:block>
+</head>
+<body>
+    <th:block th:replace="~{/Fragments/top :: navbar}"></th:block>
+
+    <section>
+        <div class="container" style="width: 80%; padding-bottom: 30px;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/posts">List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
+                </ol>
+            </nav>
+            <div class="card shadow mb-4" style="padding: 30px; display: flex; justify-content: center;">
+                <form method="post" th:action="@{/updatepost}">
+                    <!-- Hidden field to hold the post ID -->
+                    <input type="hidden" th:field="*{post.id}" />
+                    
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" class="form-control" th:field="*{post.titulo}" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Author *</label>
+                        <input type="text" class="form-control" th:field="*{post.autor}" required />
+                    </div>
+                    
+                    <label>Text *</label>
+                    <textarea id="summernote" class="form-control" th:field="*{post.texto}" required></textarea>
+                    
+                    <small class="form-text text-muted">(*) Mandatory Fields</small>
+                    <br>
+                    
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="/admin" class="btn btn-light" role="button">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 300,
+                innerPlaceHolder: true,
+                placeholder: 'write here...',
+                disableDragAndDrop: true,
+                toolbar: [
+                    // [groupName, [list of buttons]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
