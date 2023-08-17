@@ -31,7 +31,7 @@ public class Post {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate data;
 
-    @Column(length = 255, nullable = true)
+    @Column(columnDefinition = "LONGTEXT", nullable = true)
     @Lob
     private String texto;
 
